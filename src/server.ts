@@ -1,17 +1,16 @@
-// import express from 'express';
-// import routes from './routes/index.js';
-// import db from './config/connection.js';
+import express from "express";
+import "./config/connection"; // Ensure DB connects
+import router from "./routes";
 
-// await db();
+const app = express();
+const PORT = process.env.PORT || 3001;
 
-// const PORT = process.env.PORT || 3001;
-// const app = express();
+// Middleware
+app.use(express.json());
 
-// app.use(express.urlencoded({ extended: true}));
-// app.use(express.json());
+// ✅ Ensure `/api` is prefixed correctly
+app.use("/api", router);
 
-// app.use(routes);
-
-// app.listen(PORT, () => {
-//   console.log(`API server running on port ${PORT}!`);
-// });
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+});
